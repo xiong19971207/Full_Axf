@@ -1,0 +1,48 @@
+{% extends 'base_order.html' %}
+
+{% load static %}
+
+{% block ext_css %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'axf/order/order_detail.css' %}">
+{% endblock %}
+
+{% block title %}
+    {{ block.super }}
+    订单详情
+{% endblock %}
+
+{% block content %}
+    {{ block.super }}
+
+    <h4 style='font-family: "Bitstream Vera Sans Mono", Monaco, "Courier New", Courier, monospace'>订单编号:{{ order.id }}</h4>
+
+    {% for ordergoods in order.axfordergoods_set.all %}
+
+
+    <div class="menuList">
+        <a href="">
+            <img src="/static{{ ordergoods.og_goods.productimg }}" alt="">
+            <p>{{ ordergoods.og_goods.productlongname }}</p>
+            <p>{{ ordergoods.og_goods.price }}</p>
+        </a>
+
+        <section>
+            <span>{{ ordergoods.og_goods_num}}</span>
+        </section>
+    </div>
+    {% endfor %}
+
+
+    <div class="total_price">1</div>
+    <span>总计：</span>
+    <span id="total_price" >{{ total_price }}</span>
+
+    <button class="btn btn-success btn-block" id="alipay">支付</button>
+
+{% endblock %}
+
+{% block ext_js %}
+    {{ block.super }}
+    <script type="text/javascript" src="{% static 'js/alipay.js' %}"></script>
+{% endblock %}

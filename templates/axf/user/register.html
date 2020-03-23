@@ -1,0 +1,58 @@
+{% extends 'base_user.html' %}
+
+{% load static %}
+
+{% block title %}
+    {{ block.super }}
+    注册
+{% endblock %}
+
+
+{% block ext_css %}
+        {{ block.super }}
+        <link rel="stylesheet" href="{% static 'axf/user/user.css' %}">
+{% endblock %}
+
+{% block ext_js %}
+    {{ block.super }}
+    <script type="text/javascript" src="{% static 'axf/user/user.js' %}"></script>
+{% endblock %}
+
+
+{% block footer %}
+    {{ block.super }}
+    <div class="container">
+          <form action="{% url 'user:register' %}" method="post" enctype="multipart/form-data" onsubmit="return parse1()">
+              {% csrf_token %}
+          <div class="form-group">
+            <label for="exampleInputName">用户名</label>
+            <input name="name" type="text" class="form-control" id="exampleInputName" placeholder="请输入3-6位字母">
+          <span id="nameinfo"></span>
+          </div>
+
+          <div class="form-group">
+            <label for="exampleInputPassword1">密码</label>
+            <input name="password" type="password" class="form-control" id="exampleInputPassword1" placeholder="输入你的密码">
+          </div>
+
+          <div class="form-group">
+          <label for="exampleInputPassword1">确认密码</label>
+          <input type="password" class="form-control" id="exampleInputPassword2" placeholder="再次输入你的密码">
+          <span id="pwdinfo"></span>
+          </div>
+
+          <div class="form-group">
+            <label for="exampleInputPassword1">邮箱</label>
+            <input name="email" type="email" class="form-control" id="exampleInputPassword1" placeholder="输入你的邮箱">
+          </div>
+
+          <div class="form-group">
+             <label for="exampleInputFile">选择头像</label>
+             <input name="icon" type="file" id="exampleInputFile">
+          </div>
+
+          <button type="submit" class="btn btn-success btn-block">提交</button>
+          </form>
+    </div>
+
+{% endblock %}
